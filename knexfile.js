@@ -1,23 +1,15 @@
 // Update with your config settings.
+const { databaseUrl } = require('./config');
 
 module.exports = {
-
   development: {
     client: 'pg',
-    connection: {
-      database: 'my_db',
-      user: 'username',
-      password: 'password',
-    },
+    connection: databaseUrl,
   },
 
   staging: {
     client: 'pg',
-    connection: {
-      database: 'my_db',
-      user: 'username',
-      password: 'password',
-    },
+    connection: databaseUrl,
     pool: {
       min: 2,
       max: 10,
@@ -29,11 +21,7 @@ module.exports = {
 
   production: {
     client: 'pg',
-    connection: {
-      database: 'my_db',
-      user: 'username',
-      password: 'password',
-    },
+    connection: databaseUrl,
     pool: {
       min: 2,
       max: 10,

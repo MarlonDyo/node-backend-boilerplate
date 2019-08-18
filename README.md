@@ -49,6 +49,7 @@ npm run create_db
 ## Environment variables
 - **ENVIRONMENT**: Sets which database configuration to use [development, staging, production]
 - **PORT**: Sets which port is used for this server
+- **DATABASE_URL**: Url for db connection 
 
 ## Original setup
 ```
