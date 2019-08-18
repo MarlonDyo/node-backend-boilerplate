@@ -5,23 +5,13 @@ module.exports = {
   development: {
     client: 'pg',
     connection: databaseUrl,
-  },
-
-  staging: {
-    client: 'pg',
-    connection: databaseUrl,
-    pool: {
-      min: 2,
-      max: 10,
-    },
-    migrations: {
-      tableName: 'knex_migrations',
-    },
+    searchPath: ['public'],
   },
 
   production: {
     client: 'pg',
-    connection: databaseUrl,
+    connection: `${databaseUrl}?ssl=true`,
+    searchPath: ['public'],
     pool: {
       min: 2,
       max: 10,

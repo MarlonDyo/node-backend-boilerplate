@@ -1,6 +1,6 @@
 
-exports.up = (knex) => {
-  knex.schema.createTable('example_table', (table) => {
+exports.up = function migrateUp(knex) {
+  return knex.schema.createTable('example_table', (table) => {
     table.increments('id');
     table.string('name').notNullable();
     table.float('value').notNullable();
@@ -9,4 +9,6 @@ exports.up = (knex) => {
   });
 };
 
-exports.down = (knex) => knex.schema.dropTable('example_table');
+exports.down = function migrateDown(knex) {
+  return knex.schema.dropTable('example_table');
+};
