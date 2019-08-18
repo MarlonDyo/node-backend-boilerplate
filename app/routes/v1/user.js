@@ -7,14 +7,14 @@ const {
   update,
   updateValidator,
   del,
-} = require('../../model/example');
+} = require('../../model/user');
 
 const router = express.Router();
 
 router.post('/', createValidator, create);
-router.get('/:id', read);
+router.get('/:username', read);
 router.get('/', readAll);
-router.put('/:id', updateValidator, update);
-router.delete('/:id', del);
+router.put('/:username', updateValidator, update);
+router.delete('/:username', del);
 
 module.exports = router;

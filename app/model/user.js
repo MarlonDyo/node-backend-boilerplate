@@ -1,31 +1,56 @@
 const { check, validationResult } = require('express-validator');
 const {
   dbCreate,
-  dbRead,
+  dbReadByEmail,
+  dbReadByUsername,
   dbReadAll,
   dbUpdate,
   dbDelete,
-} = require('../../db/example');
+} = require('../../db/user');
 
-const nameValidator = [
-  check('name')
-    .isLength({ min: 5 })
-    .withMessage('O nome deve ter pelo menos 5 caracteres'),
+const emailValidator = [
+  check('email')
+    .isEmail()
+    .withMessage('Email inválido')
+    .custom(async (email) => {
+      if (email === null) return;
+      await dbReadByEmail(email).then((user) => {
+        if (user.length !== 0) {
+          return Promise.reject(new Error('O email já está sendo usado'));
+        }
+        return true;
+      });
+    }),
 ];
 
-const valueValidator = [
-  check('value')
-    .isFloat({ min: 0, max: 10 })
-    .withMessage('O valor deve estar entre 0 e 10'),
+const passwordValidator = [
+  check('password')
+    .isLength({ min: 6, max: 32 })
+    .withMessage('A senha deve ter de 5 a 32 caracteres'),
+];
+
+const usernameValidator = [
+  check('username')
+    .isLength({ min: 5 })
+    .withMessage('O nome deve ter pelo menos 5 caracteres')
+    .custom(async (username) => {
+      await dbReadByUsername(username).then((user) => {
+        if (user.length !== 0) {
+          return Promise.reject(new Error('O usuário já existe'));
+        }
+        return true;
+      });
+    }),
 ];
 
 const createValidator = [
-  nameValidator,
-  valueValidator,
+  usernameValidator,
+  passwordValidator,
+  emailValidator,
 ];
 const updateValidator = [
-  nameValidator[0].optional(),
-  valueValidator[0].optional(),
+  emailValidator[0].optional(),
+  passwordValidator[0].optional(),
 ];
 
 const create = (req, res) => {
@@ -51,7 +76,7 @@ const readAll = async (req, res) => {
 
 
 const read = async (req, res) => {
-  dbRead(req.params.id).then((data) => {
+  dbReadByUsername(req.params.username).then((data) => {
     if (data.length === 0) res.status(404).json({});
     else res.send(data);
   }).catch((err) => {
@@ -65,7 +90,7 @@ const update = async (req, res) => {
     res.status(422).json({ errors: errors.array() });
     return;
   }
-  dbUpdate(req.params.id, req.body).then((data) => {
+  dbUpdate(req.params.username, req.body).then((data) => {
     if (data.length === 0) res.status(404).json({});
     else res.send(data);
   }).catch((err) => {
@@ -74,7 +99,7 @@ const update = async (req, res) => {
 };
 
 const del = (req, res) => {
-  dbDelete(req.params.id).then((data) => {
+  dbDelete(req.params.username).then((data) => {
     if (data.length === 0) res.status(404).json({});
     else res.send(data);
   }).catch((err) => {
