@@ -1,14 +1,12 @@
 
-exports.up = function (knex) {
+exports.up = (knex) => {
   knex.schema.createTable('example_table', (table) => {
     table.increments('id');
-    table.string('name');
-    table.float('value');
-  })
-    .then(() => console.log('Example table created'));
+    table.string('name').notNullable();
+    table.float('value').notNullable();
+    table.timestamp('created_at').defaultTo(knex.fn.now());
+    table.timestamp('updated_at').defaultTo(knex.fn.now());
+  });
 };
 
-exports.down = function (knex) {
-  knex.schema
-    .dropTable('example_table');
-};
+exports.down = (knex) => knex.schema.dropTable('example_table');
