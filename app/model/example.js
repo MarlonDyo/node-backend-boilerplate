@@ -49,7 +49,6 @@ const readAll = async (req, res) => {
   });
 };
 
-
 const read = async (req, res) => {
   dbRead(req.params.id).then((data) => {
     if (data.length === 0) res.status(404).json({});

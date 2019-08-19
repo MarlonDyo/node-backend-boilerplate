@@ -14,21 +14,15 @@ const {
 require('../../../passport');
 
 const router = express.Router();
+const tokenValidator = passport.authenticate('jwt', { session: false })
+const passwordValidator = passport.authenticate('local', { session: false })
 
-router.post('/signup', createValidator, signUp);
-router.post(
-  '/signin',
-  passport.authenticate('local', { session: false }),
-  signIn,
-);
-router.get(
-  '/secret',
-  passport.authenticate('jwt', { session: false }),
-  secret,
-);
-router.get('/:username', read);
-router.get('/', readAll);
-router.put('/:username', updateValidator, update);
-router.delete('/:username', del);
+router.post('/signup' , createValidator   , signUp);
+router.post('/signin' , passwordValidator , signIn );
+router.get( '/secret' , tokenValidator    , secret );
+router.get( '/'       , tokenValidator    , read);
+router.put( '/'       , [tokenValidator, updateValidator], update );
+router.delete('/'     , tokenValidator    , del);
+//router.get('/', readAll);
 
 module.exports = router;
