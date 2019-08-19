@@ -1,16 +1,21 @@
 # Tech Stack
 
-### Core platform and dev tools
+### Core platform
 - **NodeJS**
 - **PostgreSQL**
 - **Heroku**
+
+### Dev tools
 - **nodemon.js**            - Library for hot-reload the server after changes
 - **ESLint.js**             - Library for linting the code
+- **Mocha.js**              - Library for unit tests
+- **Chai.js**               - Library for BDD / TDD assertion library
+- **chai-http.js**          - Add-on for http request for chai
+- **faker.js**              - Library for easily creating test data-entries
 
 ### Common HTTP-server features
 - **Express.js**            - Web application framework
-- **Cors.js**               
-- **Passport.js**           - Authentication middleware
+- **Cors.js**               - Cross-origin resource sharing library
 
 ### Data access, migrations and validation
 - **Knex.js**               - SQL query builder
@@ -19,6 +24,7 @@
 
 ### User authentication
 - **jsonwebtoken.js**       - JSON Web Tokens (JWT) authentication library
+- **Passport.js**           - Authentication middleware
 - **passport-jwt.js**       - Passport add-on for JWT validation 
 - **passport-local.js**     - Passport add-on for local validation
 - **bcryptjs**              - Encrypt and salt passwords
@@ -65,7 +71,11 @@ npm install --save pg knex express-validator
 npm install --save jsonwebtoken
 npm install --save bcryptjs
 npm install nodemon --save-dev
-npm install eslint --save-
+npm install eslint --save-dev
+npm install mocha --save-dev
+npm install chai --save-dev
+npm install chai-http --save-dev
+npm install faker --save-dev
 ```
 
 ### Original eslint setup

@@ -2,14 +2,14 @@
   "name": "node-backend-boilerplate",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "start": "node app/index.js",
-    "dev": "ENVIRONMENT=development && nodemon app/index.js",
+    "start": "node app/server.js",
+    "dev": "ENVIRONMENT=development && nodemon app/server.js",
     "lint": "./node_modules/.bin/eslint .",
     "fix": "./node_modules/.bin/eslint --fix .",
     "create_db": "createdb my_db",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/mocha/bin/mocha"
   },
   "repository": {
     "type": "git",
@@ -34,9 +34,13 @@
     "pg": "^7.12.1"
   },
   "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
     "eslint": "^6.1.0",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-import": "^2.18.2",
+    "faker": "^4.1.0",
+    "mocha": "^6.2.0",
     "nodemon": "^1.19.1"
   }
 }
