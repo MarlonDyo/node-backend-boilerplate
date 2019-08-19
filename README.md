@@ -4,18 +4,24 @@
 - **NodeJS**
 - **PostgreSQL**
 - **Heroku**
-- **nodemon.js**
-- **ESLint.js**
+- **nodemon.js**            - Library for hot-reload the server after changes
+- **ESLint.js**             - Library for linting the code
 
 ### Common HTTP-server features
 - **Express.js**            - Web application framework
-- **Cors.js**            - Web application framework
+- **Cors.js**               
 - **Passport.js**           - Authentication middleware
 
 ### Data access, migrations and validation
 - **Knex.js**               - SQL query builder
 - **Pg.js**                 - PostgreSQL library
 - **express-validator.js**  - Data validation
+
+### User authentication
+- **jsonwebtoken.js**       - JSON Web Tokens (JWT) authentication library
+- **passport-jwt.js**       - Passport add-on for JWT validation 
+- **passport-local.js**     - Passport add-on for local validation
+- **bcryptjs**              - Encrypt and salt passwords
 
 # Usage
 
@@ -53,10 +59,13 @@ npm run create_db
 
 ## Original setup
 ```
-npm install --save express cors passport
+npm install --save express cors 
+npm install --save passport passport-jwt passport-local
 npm install --save pg knex express-validator
+npm install --save jsonwebtoken
+npm install --save bcryptjs
 npm install nodemon --save-dev
-npm install eslint --save-dev
+npm install eslint --save-
 ```
 
 ### Original eslint setup

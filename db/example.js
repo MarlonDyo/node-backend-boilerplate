@@ -1,4 +1,5 @@
 const knex = require('./knex');
+
 const tableName = 'example_table';
 
 const dbCreate = (data) => knex(tableName).insert({
