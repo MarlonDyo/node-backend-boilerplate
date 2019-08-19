@@ -1,10 +1,16 @@
 // Update with your config settings.
-const { databaseUrl } = require('./config');
+const { databaseUrl, testDatabaseUrl } = require('./config');
 
 module.exports = {
   development: {
     client: 'pg',
     connection: databaseUrl,
+    searchPath: ['public'],
+  },
+
+  test: {
+    client: 'pg',
+    connection: testDatabaseUrl,
     searchPath: ['public'],
   },
 

@@ -10,7 +10,9 @@
 - **ESLint.js**             - Library for linting the code
 - **Mocha.js**              - Library for unit tests
 - **Chai.js**               - Library for BDD / TDD assertion library
-- **chai-http.js**          - Add-on for http request for chai
+- **chai-http.js**          - Http request Add-on for chai
+- **chai-like.js**          - Add-on for chai
+- **chai-things.js**        - Add-on for chai
 - **faker.js**              - Library for easily creating test data-entries
 
 ### Common HTTP-server features
@@ -74,7 +76,7 @@ npm install nodemon --save-dev
 npm install eslint --save-dev
 npm install mocha --save-dev
 npm install chai --save-dev
-npm install chai-http --save-dev
+npm install chai-http chai-like chai-things --save-dev
 npm install faker --save-dev
 ```
 

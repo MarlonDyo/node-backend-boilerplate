@@ -10,50 +10,50 @@ const {
 } = require('../../db/user');
 const { jwtSecret } = require('../../config');
 
-const emailValidator = [
-  check('email')
-    .isEmail()
-    .withMessage('Email inválido')
-    .custom(async (email) => {
-      if (email === null) return;
-      await dbReadByEmail(email).then((user) => {
-        if (user.length !== 0) {
-          return Promise.reject(new Error('O email já está sendo usado'));
-        }
-        return true;
-      });
-    }),
-];
+const emailValidator = check('email')
+  .optional()
+  .isEmail()
+  .custom(async (email) => {
+    if (email === null) return;
+    await dbReadByEmail(email).then((user) => {
+      if (user.length !== 0) {
+        return Promise.reject(new Error('O email já está sendo usado'));
+      }
+      return true;
+    });
+  })
+  .withMessage('Email inválido');
 
-const passwordValidator = [
-  check('password')
-    .isLength({ min: 6, max: 32 })
-    .withMessage('A senha deve ter de 5 a 32 caracteres'),
-];
+const passwordValidator = check('password')
+  .optional()
+  .isLength({ min: 6, max: 32 })
+  .withMessage('A senha deve ter de 5 a 32 caracteres');
 
-const usernameValidator = [
-  check('username')
-    .isLength({ min: 5 })
-    .withMessage('O nome deve ter pelo menos 5 caracteres')
-    .custom(async (username) => {
-      await dbReadByUsername(username).then((user) => {
-        if (user.length !== 0) {
-          return Promise.reject(new Error('O usuário já existe'));
-        }
-        return true;
-      });
-    }),
-];
+const usernameValidator = check('username')
+  .optional()
+  .isLength({ min: 5 })
+  .custom(async (username) => {
+    await dbReadByUsername(username).then((user) => {
+      if (user.length !== 0) {
+        return Promise.reject(new Error('O usuário já existe'));
+      }
+      return true;
+    });
+  })
+  .withMessage('O nome deve ter pelo menos 5 caracteres');
 
 const createValidator = [
+  check('username').exists().withMessage('O nome do usuário é necessário'),
+  check('password').exists().withMessage('A senha é necessária'),
+  check('email').exists().withMessage('O email é necessário'),
   usernameValidator,
   passwordValidator,
   emailValidator,
 ];
 
 const updateValidator = [
-  emailValidator[0].optional(),
-  passwordValidator[0].optional(),
+  emailValidator,
+  passwordValidator,
 ];
 
 const signToken = (user) => {

@@ -7,25 +7,25 @@ const {
   dbDelete,
 } = require('../../db/example');
 
-const nameValidator = [
-  check('name')
-    .isLength({ min: 5 })
-    .withMessage('O nome deve ter pelo menos 5 caracteres'),
-];
+const nameValidator = check('name')
+  .optional()
+  .isLength({ min: 5 })
+  .withMessage('O nome deve ter pelo menos 5 caracteres');
 
-const valueValidator = [
-  check('value')
-    .isFloat({ min: 0, max: 10 })
-    .withMessage('O valor deve estar entre 0 e 10'),
-];
+const valueValidator = check('value')
+  .optional()
+  .isFloat({ min: 0, max: 10 })
+  .withMessage('O valor deve estar entre 0 e 10');
 
 const createValidator = [
+  check('name').exists().withMessage('O nome é necessário'),
+  check('value').exists().withMessage('O valor é necessário'),
   nameValidator,
   valueValidator,
 ];
 const updateValidator = [
-  nameValidator[0].optional(),
-  valueValidator[0].optional(),
+  nameValidator,
+  valueValidator,
 ];
 
 const create = (req, res) => {
@@ -59,7 +59,7 @@ const read = async (req, res) => {
   });
 };
 
-const update = async (req, res) => {
+const update = (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     res.status(422).json({ errors: errors.array() });

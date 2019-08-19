@@ -7,11 +7,11 @@ const server = require('../app/index');
 chai.use(chaiHttp);
 
 describe('Testing route: /api/v1/tests', () => {
-  const testUrl = '/api/v1/tests';
-  const testEntry = {
+  const url = '/api/v1/tests';
+  const validEntry = {
     name: faker.name.findName(),
   };
-  const invalidTestEntry = {
+  const invalidEntry = {
     name: 'Adam',
   };
 
@@ -22,7 +22,7 @@ describe('Testing route: /api/v1/tests', () => {
     it('should not respond to empty post', (done) => {
       chai
         .request(server)
-        .post(`${testUrl}`)
+        .post(`${url}`)
         .end((err, res) => {
           expect(res.status).to.be.equal(422);
           done();
@@ -31,8 +31,8 @@ describe('Testing route: /api/v1/tests', () => {
     it('should respond to post', (done) => {
       chai
         .request(server)
-        .post(`${testUrl}`)
-        .send(testEntry)
+        .post(`${url}`)
+        .send(validEntry)
         .end((err, res) => {
           expect(res.status).to.be.equal(200);
           done();
@@ -41,8 +41,8 @@ describe('Testing route: /api/v1/tests', () => {
     it('should not respond to invalid post', (done) => {
       chai
         .request(server)
-        .post(`${testUrl}`)
-        .send(invalidTestEntry)
+        .post(`${url}`)
+        .send(invalidEntry)
         .end((err, res) => {
           expect(res.status).to.be.equal(422);
           done();
@@ -50,10 +50,10 @@ describe('Testing route: /api/v1/tests', () => {
     });
   });
   describe('READ', () => {
-    it('should list ALL tests', (done) => {
+    it('should list ALL items', (done) => {
       chai
         .request(server)
-        .get(testUrl)
+        .get(url)
         .end((err, res) => {
           expect(res.status).to.be.equal(200);
           expect(res.body).to.be.an('array');
@@ -66,7 +66,7 @@ describe('Testing route: /api/v1/tests', () => {
     it('should respond to get id=1', (done) => {
       chai
         .request(server)
-        .get(`${testUrl}/1`)
+        .get(`${url}/1`)
         .end((err, res) => {
           expect(res.status).to.be.equal(200);
           expect(res.body).to.deep.equal({ id: 1, name: 'test 1' });
@@ -76,7 +76,7 @@ describe('Testing route: /api/v1/tests', () => {
     it('should not respond to get id=10', (done) => {
       chai
         .request(server)
-        .get(`${testUrl}/10`)
+        .get(`${url}/10`)
         .end((err, res) => {
           expect(res.status).to.be.equal(404);
           done();
@@ -87,10 +87,10 @@ describe('Testing route: /api/v1/tests', () => {
     it('should respond to put id=1', (done) => {
       chai
         .request(server)
-        .put(`${testUrl}/1`)
-        .send(testEntry)
+        .put(`${url}/1`)
+        .send(validEntry)
         .end((err, res) => {
-          expect(res.body).to.deep.include({ id: 1, name: testEntry.name });
+          expect(res.body).to.deep.include({ id: 1, name: validEntry.name });
           expect(res.status).to.be.equal(200);
           done();
         });
@@ -98,8 +98,8 @@ describe('Testing route: /api/v1/tests', () => {
     it('should not respond to put id=10', (done) => {
       chai
         .request(server)
-        .put(`${testUrl}/10`)
-        .send(testEntry)
+        .put(`${url}/10`)
+        .send(validEntry)
         .end((err, res) => {
           expect(res.status).to.be.equal(404);
           done();
@@ -110,7 +110,7 @@ describe('Testing route: /api/v1/tests', () => {
     it('should respond to delete id=1', (done) => {
       chai
         .request(server)
-        .delete(`${testUrl}/1`)
+        .delete(`${url}/1`)
         .end((err, res) => {
           expect(res.body).to.deep.include({ id: 1 });
           expect(res.status).to.be.equal(200);
@@ -120,8 +120,8 @@ describe('Testing route: /api/v1/tests', () => {
     it('should not respond to delete id=10', (done) => {
       chai
         .request(server)
-        .delete(`${testUrl}/10`)
-        .send(testEntry)
+        .delete(`${url}/10`)
+        .send(validEntry)
         .end((err, res) => {
           expect(res.status).to.be.equal(404);
           done();
