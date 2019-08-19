@@ -14,6 +14,7 @@
 - **chai-like.js**          - Add-on for chai
 - **chai-things.js**        - Add-on for chai
 - **faker.js**              - Library for easily creating test data-entries
+- **nyc.js**                - Library for visualizing test results and coverage
 
 ### Common HTTP-server features
 - **Express.js**            - Web application framework
@@ -78,6 +79,7 @@ npm install mocha --save-dev
 npm install chai --save-dev
 npm install chai-http chai-like chai-things --save-dev
 npm install faker --save-dev
+npm install nyc --save-dev
 ```
 
 ### Original eslint setup
