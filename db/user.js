@@ -22,43 +22,22 @@ const dbReadByEmail = (email) => knex(tableName)
   .returning('*');
 
 const dbUpdate = async (username, data) => {
+  let passwordHash;
+  let newEmail;
   if (data.password) {
     const salt = await bcrypt.genSalt(10);
-    const passwordHash = await bcrypt.hash(data.password, salt); 
-    if (data.email) {
-      return knex(tableName)
-      .where({ username })
-      .update({
-        password: passwordHash,
-        email: data.email,
-        updated_at: knex.fn.now(),
-      }).returning('*'); 
-    }
-    else {
-      return knex(tableName)
-      .where({ username })
-      .update({
-        password: passwordHash,
-        updated_at: knex.fn.now(),
-      }).returning('*'); 
-    }
+    passwordHash = await bcrypt.hash(data.password, salt);
   }
-  else {
-    if (data.email) {
-      return knex(tableName)
-      .update({
-        email: data.email,
-        updated_at: knex.fn.now(),
-      })
-      .where({ username })
-      .returning('*'); 
-    }
-    else {
-      return knex(tableName)
-      .where({ username })
-      .returning('*'); 
-    }
+  if (data.email) {
+    newEmail = data.email;
   }
+  return knex(tableName)
+    .where({ username })
+    .update({
+      password: passwordHash,
+      email: newEmail,
+      updated_at: knex.fn.now(),
+    }).returning('*');
 };
 
 const dbDelete = (username) => knex(tableName)
