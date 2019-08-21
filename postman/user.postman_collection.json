@@ -1,0 +1,199 @@
+{
+	"info": {
+		"_postman_id": "22f278d7-4e30-458a-a238-e32c13c0ee26",
+		"name": "user",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "get /",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}",
+					"host": [
+						"{{host}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "signUp",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\": \"marlondyo\",\n    \"password\": \"qwerty\",\n    \"email\": \"marlondyo@gmail.com\"\n}"
+				},
+				"url": {
+					"raw": "{{host}}api/v1/users/signup",
+					"host": [
+						"{{host}}api"
+					],
+					"path": [
+						"v1",
+						"users",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "signIn",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\": \"marlondyo\",\n    \"password\": \"qwerty\"\n}"
+				},
+				"url": {
+					"raw": "{{host}}api/v1/users/signin",
+					"host": [
+						"{{host}}api"
+					],
+					"path": [
+						"v1",
+						"users",
+						"signin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "secret",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJub2RlLWJhY2tlbmQtYm9pbGVycGxhdGUiLCJzdWIiOiJtYXJsb25keW8iLCJpYXQiOjE1NjY0MTA4MDA3NjUsImV4cCI6MTU2NjQ5NzIwMDc2NX0.82F7yo0W3QBCD4DehqHEZnozcpug7nlBFEcEZ0ca5fY",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}api/v1/users/secret",
+					"host": [
+						"{{host}}api"
+					],
+					"path": [
+						"v1",
+						"users",
+						"secret"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "read",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJub2RlLWJhY2tlbmQtYm9pbGVycGxhdGUiLCJzdWIiOiJtYXJsb25keW8iLCJpYXQiOjE1NjY0MTA4MDA3NjUsImV4cCI6MTU2NjQ5NzIwMDc2NX0.82F7yo0W3QBCD4DehqHEZnozcpug7nlBFEcEZ0ca5fY",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}api/v1/users/",
+					"host": [
+						"{{host}}api"
+					],
+					"path": [
+						"v1",
+						"users",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJub2RlLWJhY2tlbmQtYm9pbGVycGxhdGUiLCJzdWIiOiJtYXJsb25keW8iLCJpYXQiOjE1NjY0MTA4MDA3NjUsImV4cCI6MTU2NjQ5NzIwMDc2NX0.82F7yo0W3QBCD4DehqHEZnozcpug7nlBFEcEZ0ca5fY",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"password\": \"qwerty\"\n}"
+				},
+				"url": {
+					"raw": "{{host}}api/v1/users/",
+					"host": [
+						"{{host}}api"
+					],
+					"path": [
+						"v1",
+						"users",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJub2RlLWJhY2tlbmQtYm9pbGVycGxhdGUiLCJzdWIiOiJtYXJsb25keW8iLCJpYXQiOjE1NjY0MTA4MDA3NjUsImV4cCI6MTU2NjQ5NzIwMDc2NX0.82F7yo0W3QBCD4DehqHEZnozcpug7nlBFEcEZ0ca5fY",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}api/v1/users/",
+					"host": [
+						"{{host}}api"
+					],
+					"path": [
+						"v1",
+						"users",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
