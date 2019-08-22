@@ -1,5 +1,6 @@
 const { dbCreate } = require('../db/example');
-const tableName = 'example_table'
+
+const tableName = 'example_table';
 
 exports.seed = function seed(knex) {
   // Deletes ALL existing entries

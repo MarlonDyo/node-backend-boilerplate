@@ -22,7 +22,7 @@ const dbUpdate = async (username, data) => {
     const salt = await bcrypt.genSalt(10);
     data.password = await bcrypt.hash(data.password, salt);
   }
-  data.updated_at = knex.fn.now()
+  data.updated_at = knex.fn.now();
   return knex(tableName)
     .where({ username })
     .update(data).returning('*');

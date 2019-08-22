@@ -16,5 +16,7 @@ module.exports = {
     ecmaVersion: 2018,
   },
   rules: {
+    'func-names': 0,
+    "no-param-reassign": [2, { "props": false }],
   },
 };
