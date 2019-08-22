@@ -11,6 +11,7 @@ passport.use(
     jwtFromRequest: ExtractJwt.fromHeader('authorization'),
     secretOrKey: jwtSecret,
   }, async (payLoad, done) => {
+    if (payLoad.sub === undefined) done(null, false)
     try {
       // Find the user specified in token
       dbReadByUsername(payLoad.sub).then((data) => {

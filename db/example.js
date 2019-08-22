@@ -10,7 +10,7 @@ const dbRead = (id) => knex(tableName)
 
 const dbUpdate = (id, data) => {
   data.updated_at = knex.fn.now();
-  knex(tableName)
+  return knex(tableName)
     .where({ id })
     .update(data).returning('*');
 };
