@@ -2,22 +2,18 @@ const knex = require('./knex');
 
 const tableName = 'example_table';
 
-const dbCreate = (data) => knex(tableName).insert({
-  name: data.name,
-  value: data.value,
-}).returning('*');
+const dbCreate = (data) => knex(tableName).insert( data ).returning('*');
 
 const dbRead = (id) => knex(tableName)
   .where({ id })
   .returning('*');
 
-const dbUpdate = (id, data) => knex(tableName)
+const dbUpdate = (id, data) => {
+  data.updated_at = knex.fn.now();
+  knex(tableName)
   .where({ id })
-  .update({
-    name: data.name,
-    value: data.value,
-    updated_at: knex.fn.now(),
-  }).returning('*');
+  .update( data ).returning('*');
+}
 
 const dbDelete = (id) => knex(tableName)
   .where({ id })
